@@ -178,9 +178,7 @@ class FormBuilder {
 	 */
 	public function token()
 	{
-		$token = ! empty($this->csrfToken) ? $this->csrfToken : $this->session->getToken();
-
-		return $this->hidden('_token', $token);
+		return $this->hidden('_token', $this->csrfToken);
 	}
 
 	/**
@@ -905,7 +903,7 @@ class FormBuilder {
 	{
 		if (is_object($this->model))
 		{
-			return object_get($this->model, $this->transformKey($name));
+			return data_get($this->model, $this->transformKey($name));
 		}
 		elseif (is_array($this->model))
 		{
